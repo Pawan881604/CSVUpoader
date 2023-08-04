@@ -1,0 +1,55 @@
+<%- include('./assets/header')%>
+<div class="page">
+    <div class="main">
+        <div class="csvList">
+            <div class="container">
+        
+                <% if (CSV.length===0) { %>
+                    <p class="csv">
+                        CSV is empty
+                    </p>
+                    <% }else{%>
+        
+                        <h2>
+                            <%= CSV.filename %>
+                        </h2>
+        
+                        <table>
+                            <thead>
+                                <!-- run loop in data and get key and value -->
+                                <% const headerRow=CSV.header_row; headerRow.forEach((item)=> {
+                                    const keys = Object.keys(item);
+                                    %>
+                                    <tr>
+                                        <% keys.forEach((key)=> {
+                                            %>
+                                            <th>
+                                                <%= key %>
+                                            </th>
+                                            <% }); }); %>
+                                    </tr>
+                            </thead>
+                            <tbody>
+                                <% const bodyRow = CSV.data_rows;
+                                   bodyRow.forEach((item) => {
+                                       const keys = Object.keys(item);
+                                %>
+                                       <tr>
+                                           <% keys.forEach((key) => { %>
+                                               <td><%= item[key] %></td>
+                                           <% }); %>
+                                       </tr>
+                                <% });
+                                %>
+                            </tbody>
+                            
+                        </table>
+        
+                        <%}%>
+                    
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include('./assets/footer') %>

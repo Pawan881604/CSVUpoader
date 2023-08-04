@@ -1,0 +1,51 @@
+<%- include('./assets/header')%>
+<!-- views/upload.ejs -->
+<div class="page">
+    <div class="main">
+        <div class="container mt-5">
+            <h1 class="text-center mb-4">CSV Upload</h1>
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <form id="uploadForm" action="/upload" method="post" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="csvFile">Select a CSV file to upload:</label>
+                            <input type="file" id="fileInput" class="custom-file-input" name="file">
+                        </div>
+                        <input type="submit" value="submit">
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="csvList">
+            <div class="title">
+                <h2>
+                    View CSV File
+                </h2>
+            </div>
+            <div class="container">
+                <ul>
+                    <% if (CSV.length === 0) { %>
+                        <li>
+                            <div class="csv">
+                                CSV is empty
+                            </div>
+                        </li>
+                        <% }else{ 
+                            CSV.forEach((item)=>{
+                            %>
+                                <li>
+                                    <div>
+                                        <%= item.filename %>
+                                    </div>
+                                        <div>
+                                            <a href="/csv/<%=item._id%>">View</a>
+                                        </div>
+                                </li>
+                            <%})}%>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include('./assets/footer') %>
